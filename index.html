@@ -441,6 +441,58 @@
       });
     }
 
+    const autonomyOptions = {
+      efdi_all: [
+        { id: "autonomy_all", label: "Area", breadcrumb: "Overall > Unitary system" },
+        { id: "autonomy_policy_all", label: "Policy", breadcrumb: "Overall > Unitary system > Policy" },
+        { id: "autonomy_policy_all_assess", label: "Guidelines", breadcrumb: "Overall > Unitary system > Policy > Assessment" },
+        { id: "autonomy_policy_all_cur", label: "Centralized Curriculum", breadcrumb: "Overall > Unitary system > Policy > Centralized Curriculum" },
+        { id: "autonomy_practice_all", label: "Practice", breadcrumb: "Overall > Unitary system > Practice" },
+        { id: "autonomy_practice_all_ce_act", label: "Centralization of CE Activities", breadcrumb: "Overall > Unitary system > Practice > Centralization of Activities" },
+        { id: "autonomy_practice_all_teach_cur", label: "Teacher Use of Official Curricula", breadcrumb: "Overall > Unitary system > Practice > Use of Official Curricula" }
+      ],
+      efdi_policy: [
+        { id: "autonomy_policy_policy", label: "Area", breadcrumb: "Policy > Unitary system" },
+        { id: "autonomy_policy_assess", label: "Guidelines", breadcrumb: "Policy > Unitary system > Assessment" },
+        { id: "autonomy_policy_cur", label: "Centralized Curriculum", breadcrumb: "Policy > Unitary system > Centralized Curriculum" }
+      ],
+      efdi_practice: [
+        { id: "autonomy_practice_practice", label: "Area", breadcrumb: "Practice > Unitary system" },
+        { id: "autonomy_practice_ce_act", label: "Centralization of CE Activities", breadcrumb: "Practice > Unitary system > Centralization of CE Activities" },
+        { id: "autonomy_practice_teach_cur", label: "Teacher Use of Official Curricula", breadcrumb: "Practice > Unitary system > Use of Official Curricula" }
+      ],
+      efdi_equality: [
+        { id: "autonomy_equality", label: "Area", breadcrumb: "Equality > Unitary system" },
+        { id: "autonomy_policy_equality", label: "Policy", breadcrumb: "Equality > Unitary system > Policy" },
+        { id: "autonomy_policy_equality_assess", label: "Guidelines", breadcrumb: "Equality > Unitary system > Policy > Assessment" },
+        { id: "autonomy_policy_equality_cur", label: "Centralized Curriculum", breadcrumb: "Overall > Unitary system > Policy > Centralized Curriculum" },
+        { id: "autonomy_practice_equality", label: "Practice", breadcrumb: "Equality > Unitary system > Practice" },
+        { id: "autonomy_practice_equality_ce_act", label: "Student Involvement", breadcrumb: "Equality > Unitary system > Practice > Centralization of CE Activities" },
+        { id: "autonomy_practice_equality_teach_cur", label: "Teacher Use of Official Curricula", breadcrumb: "Equality > Unitary system > Practice > Use of Official Curricula" }
+      ]
+    };
+
+    function updateAutonomyDropdown() {
+      const dropdown = document.getElementById("autonomyDropdown");
+      dropdown.innerHTML = ""; // Clear existing items
+
+      autonomyOptions[topLevelSelection].forEach(option => {
+        const item = document.createElement("div");
+        item.className = "dropdown-item";
+
+        // Assign indentation classes
+        if (option.label === "Policy" || option.label === "Practice") {
+          item.classList.add("indent-1");
+        } else if (!["Area", "Policy", "Practice"].includes(option.label)) {
+          item.classList.add("indent-2");
+        }
+
+        item.textContent = option.label;
+        item.onclick = () => switchTab(option.id, option.breadcrumb);
+        dropdown.appendChild(item);
+      });
+    }
+    
     function updateYear(index) {
       currentYear = years[index];
       document.getElementById("selectedYear").textContent = currentYear;
@@ -453,6 +505,7 @@
       updateCurriculumDropdown();
       updatePedagogyDropdown(); // Add this line
       updateEthosDropdown();
+      updateAutonomyDropdown();
       updateTrainingDropdown();
     }
 
@@ -592,7 +645,27 @@
           ethos_practice_all_teacher: `${baseURL}comp_ethos_prac_teach_${currentYear}/`,
           ethos_practice_non_teacher: `${baseURL}comp_ethos_prac_teach_${currentYear}/`,
           ethos_practice_teacher: `${baseURL}comp_ethos_prac_teach_${currentYear}/`,
-          ethos_practice_levels_teacher: `${baseURL}comp_ethos_prac_teach_${currentYear}/`
+          ethos_practice_levels_teacher: `${baseURL}comp_ethos_prac_teach_${currentYear}/`,
+          autonomy_all: `${baseURL}comp_subin_auto_${currentYear}/`,
+          autonomy_equality: `${baseURL}comp_subin_auto_${currentYear}/`,
+          autonomy_policy_all: `${baseURL}comp_auto_pol_${currentYear}/`,
+          autonomy_policy_policy: `${baseURL}comp_auto_pol_${currentYear}/`,
+          autonomy_policy_equality: `${baseURL}comp_auto_pol_${currentYear}/`,
+          autonomy_policy_all_assess: `${baseURL}comp_auto_pol_assess_${currentYear}/`,
+          autonomy_policy_assess: `${baseURL}comp_auto_pol_assess_${currentYear}/`,
+          autonomy_policy_equality_assess: `${baseURL}comp_auto_pol_assess_${currentYear}/`,
+          autonomy_policy_all_cur: `${baseURL}comp_auto_pol_cur_${currentYear}/`,
+          autonomy_policy_cur: `${baseURL}comp_auto_pol_cur_${currentYear}/`,
+          autonomy_policy_equality_cur: `${baseURL}comp_auto_pol_cur_${currentYear}/`,
+          autonomy_practice_all: `${baseURL}comp_auto_prac_${currentYear}/`,
+          autonomy_practice_practice: `${baseURL}comp_auto_prac_${currentYear}/`,
+          autonomy_practice_equality: `${baseURL}comp_auto_prac_${currentYear}/`,
+          autonomy_practice_all_ce_act: `${baseURL}comp_auto_prac_ce_act_${currentYear}/`,
+          autonomy_practice_ce_act: `${baseURL}comp_auto_prac_ce_act_${currentYear}/`,
+          autonomy_practice_equality_ce_act: `${baseURL}comp_auto_prac_ce_act_${currentYear}/`,
+          autonomy_practice_all_teach_cur: `${baseURL}comp_auto_prac_cur_${currentYear}/`,
+          autonomy_practice_teach_cur: `${baseURL}comp_auto_prac_cur_${currentYear}/`,
+          autonomy_practice_equality_teach_cur: `${baseURL}comp_auto_prac_cur_${currentYear}/`,
         };
 
         mapFrame.src = mapURLs[mapID] || mapURLs['efdi_all'];
@@ -613,6 +686,7 @@
     updateCurriculumDropdown();
     updatePedagogyDropdown();
     updateEthosDropdown();
+    updateAutonomyDropdown();
     updateTrainingDropdown();
   </script>
 </body>
