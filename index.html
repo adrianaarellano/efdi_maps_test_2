@@ -158,6 +158,11 @@
     Training
     <div class="dropdown-menu" id="trainingDropdown"></div>
   </div>
+  
+  <div class="tab">
+    Ethos
+    <div class="dropdown-menu" id="ethosDropdown"></div>
+  </div>
 </div>
 
   <div class="year-slider">
@@ -379,6 +384,63 @@
       });
     }
 
+    const ethosOptions = {
+      efdi_all: [
+        { id: "ethos_all", label: "Area", breadcrumb: "Overall > Ethos" },
+        { id: "ethos_policy_all", label: "Policy", breadcrumb: "Overall > Ethos > Policy" },
+        { id: "ethos_policy_all_guide", label: "Guidelines", breadcrumb: "Overall > Ethos > Policy > Guidelines" },
+        { id: "ethos_practice", label: "Practice", breadcrumb: "Overall > Ethos > Practice" },
+        { id: "ethos_practice_all_student", label: "Student Involvement", breadcrumb: "Overall > Ethos > Practice > Student Involvement" },
+        { id: "ethos_practice_all_teacher", label: "Teacher Involvement", breadcrumb: "Overall > Ethos > Practice > Teacher Involvement" }
+      ],
+      efdi_non_system: [
+        { id: "ethos_non", label: "Area", breadcrumb: "Non-system > Ethos" },
+        { id: "ethos_policy_non", label: "Policy", breadcrumb: "Non-system > Ethos > Policy" },
+        { id: "ethos_policy_non_guide", label: "Guidelines", breadcrumb: "Non-system > Ethos > Policy > Guidelines" },
+        { id: "ethos_non_practice", label: "Practice", breadcrumb: "Non-system > Ethos > Practice" },
+        { id: "ethos_practice_non_student", label: "Student Involvement", breadcrumb: "Non-system > Ethos > Practice > Student Involvement" },
+        { id: "ethos_practice_non_teacher", label: "Teacher Involvement", breadcrumb: "Non-system > Ethos > Practice > Teacher Involvement" }
+      ],
+      efdi_policy: [
+        { id: "ethos_policy_policy", label: "Area", breadcrumb: "Policy > Ethos" },
+        { id: "ethos_policy_guide", label: "Guidelines", breadcrumb: "Policy > Ethos > Guidelines" }
+      ],
+      efdi_practice: [
+        { id: "ethos_practice_practice", label: "Area", breadcrumb: "Practice > Ethos" },
+        { id: "ethos_practice_student", label: "Student Involvement", breadcrumb: "Practice > Ethos > Student Involvement" },
+        { id: "ethos_practice_teacher", label: "Teacher Involvement", breadcrumb: "Practice > Ethos > Teacher Involvement" }
+      ],
+      efdi_levels: [
+        { id: "ethos_levels", label: "Area", breadcrumb: "Levels > Ethos" },
+        { id: "ethos_policy_levels", label: "Policy", breadcrumb: "Levels > Ethos > Policy" },
+        { id: "ethos_policy_levels_guide", label: "Guidelines", breadcrumb: "Levels > Ethos > Policy > Guidelines" },
+        { id: "ethos_practice", label: "Practice", breadcrumb: "Levels > Ethos > Practice" },
+        { id: "ethos_practice_levels_student", label: "Student Involvement", breadcrumb: "Levels > Ethos > Practice > Student Involvement" },
+        { id: "ethos_practice_levels_teacher", label: "Teacher Involvement", breadcrumb: "Levels > Ethos > Practice > Teacher Involvement" }
+      ]
+    };
+
+    function updateEthosDropdown() {
+      const dropdown = document.getElementById("ethosDropdown");
+      dropdown.innerHTML = ""; // Clear existing items
+
+      ethosOptions[topLevelSelection].forEach(option => {
+        const item = document.createElement("div");
+        item.className = "dropdown-item";
+
+        // Assign indentation classes
+        if (option.label === "Policy" || option.label === "Practice") {
+          item.classList.add("indent-1");
+        } else if (!["Area", "Policy", "Practice"].includes(option.label)) {
+          item.classList.add("indent-2");
+        }
+
+        item.textContent = option.label;
+        item.onclick = () => switchTab(option.id, option.breadcrumb);
+        dropdown.appendChild(item);
+      });
+    }
+
     function updateYear(index) {
       currentYear = years[index];
       document.getElementById("selectedYear").textContent = currentYear;
@@ -391,6 +453,7 @@
       updateCurriculumDropdown();
       updatePedagogyDropdown(); // Add this line
       updateTrainingDropdown();
+      updateEthosDropdown();
     }
 
     function switchTab(mapID, newBreadcrumbPath = '') {
@@ -506,7 +569,31 @@
           train_policy_all_mandatory: `${baseURL}comp_train_pol_man_${currentYear}/`,
           train_policy_non_mandatory: `${baseURL}comp_train_pol_man_${currentYear}/`,
           train_policy_mandatory: `${baseURL}comp_train_pol_man_${currentYear}/`,
-          train_policy_levels_mandatory: `${baseURL}comp_train_pol_man_${currentYear}/`
+          train_policy_levels_mandatory: `${baseURL}comp_train_pol_man_${currentYear}/`,
+          ethos_all: `${baseURL}comp_subin_ethos_${currentYear}/`,
+          ethos_non: `${baseURL}comp_subin_ethos_${currentYear}/`,
+          ethos_levels: `${baseURL}comp_subin_ethos_${currentYear}/`,
+          ethos_policy_all: `${baseURL}comp_ethos_pol_${currentYear}/`,
+          ethos_policy_non: `${baseURL}comp_ethos_pol_${currentYear}/`,
+          ethos_policy_policy: `${baseURL}comp_ethos_pol_${currentYear}/`,
+          ethos_policy_levels: `${baseURL}comp_ethos_pol_${currentYear}/`,
+          ethos_policy_all_guide: `${baseURL}comp_ethos_pol_guide_${currentYear}/`,
+          ethos_policy_non_guide: `${baseURL}comp_ethos_pol_guide_${currentYear}/`,
+          ethos_policy_guide: `${baseURL}comp_ethos_pol_guide_${currentYear}/`,
+          ethos_policy_levels_guide: `${baseURL}comp_ethos_pol_guide_${currentYear}/`,
+          ethos_practice_all: `${baseURL}comp_ethos_prac_${currentYear}/`,
+          ethos_practice_non: `${baseURL}comp_ethos_prac_${currentYear}/`,
+          ethos_practice_practice: `${baseURL}comp_ethos_prac_${currentYear}/`,
+          ethos_practice_levels: `${baseURL}comp_ethos_prac_${currentYear}/`,
+          ethos_practice_levels: `${baseURL}comp_ethos_prac_${currentYear}/`,
+          ethos_practice_all_student: `${baseURL}comp_ethos_prac_student_${currentYear}/`,
+          ethos_practice_non_student: `${baseURL}comp_ethos_prac_student_${currentYear}/`,
+          ethos_practice_student: `${baseURL}comp_ethos_prac_student_${currentYear}/`,
+          ethos_practice_levels_student: `${baseURL}comp_ethos_prac_student_${currentYear}/`,
+          ethos_practice_all_teacher: `${baseURL}comp_ethos_prac_teach_${currentYear}/`,
+          ethos_practice_non_teacher: `${baseURL}comp_ethos_prac_teach_${currentYear}/`,
+          ethos_practice_teacher: `${baseURL}comp_ethos_prac_teach_${currentYear}/`,
+          ethos_practice_levels_teacher: `${baseURL}comp_ethos_prac_teach_${currentYear}/`
         };
 
         mapFrame.src = mapURLs[mapID] || mapURLs['efdi_all'];
@@ -527,6 +614,7 @@
     updateCurriculumDropdown();
     updatePedagogyDropdown();
     updateTrainingDropdown();
+    updateEthosDropdown();
   </script>
 </body>
 </html>
