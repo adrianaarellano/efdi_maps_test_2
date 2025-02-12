@@ -163,6 +163,11 @@
     Ethos
     <div class="dropdown-menu" id="ethosDropdown"></div>
   </div>
+  
+  <div class="tab">
+    Unitary System
+    <div class="dropdown-menu" id="autonomyDropdown"></div>
+  </div>
 </div>
 
   <div class="year-slider">
@@ -505,8 +510,8 @@
       updateCurriculumDropdown();
       updatePedagogyDropdown(); // Add this line
       updateEthosDropdown();
-      updateTrainingDropdown();
       updateAutonomyDropdown();
+      updateTrainingDropdown();
     }
 
     function switchTab(mapID, newBreadcrumbPath = '') {
@@ -665,7 +670,7 @@
           autonomy_practice_equality_ce_act: `${baseURL}comp_auto_prac_ce_act_${currentYear}/`,
           autonomy_practice_all_teach_cur: `${baseURL}comp_auto_prac_cur_${currentYear}/`,
           autonomy_practice_teach_cur: `${baseURL}comp_auto_prac_cur_${currentYear}/`,
-          autonomy_practice_equality_teach_cur: `${baseURL}comp_auto_prac_cur_${currentYear}/`,
+          autonomy_practice_equality_teach_cur: `${baseURL}comp_auto_prac_cur_${currentYear}/`
         };
 
         mapFrame.src = mapURLs[mapID] || mapURLs['efdi_all'];
@@ -686,8 +691,8 @@
     updateCurriculumDropdown();
     updatePedagogyDropdown();
     updateEthosDropdown();
-    updateTrainingDropdown();
     updateAutonomyDropdown();
+    updateTrainingDropdown();
   </script>
 </body>
 </html>
