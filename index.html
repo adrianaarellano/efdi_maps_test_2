@@ -224,7 +224,28 @@
         { id: "cur_policy_equality_program", label: "Unified Curricula", breadcrumb: "Equality > Curriculum > Policy > Unified Curricula" }
       ]
     };
+    
+    function updateCurriculumDropdown() {
+      const dropdown = document.getElementById("curriculumDropdown");
+      dropdown.innerHTML = ""; // Clear existing items
+      
+      curriculumOptions[topLevelSelection].forEach(option => {
+        const item = document.createElement("div");
+        item.className = "dropdown-item";
 
+        // Assign indentation classes
+        if (option.label === "Policy" || option.label === "Practice") {
+          item.classList.add("indent-1");
+        } else if (!["Area", "Policy", "Practice"].includes(option.label)) {
+          item.classList.add("indent-2");
+        }
+
+        item.textContent = option.label;
+        item.onclick = () => switchTab(option.id, option.breadcrumb);
+        dropdown.appendChild(item);
+      });
+    }
+    
     const pedagogyOptions = {
       efdi_all: [
         { id: "pedagogy_all", label: "Area", breadcrumb: "Overall > Pedagogy" },
@@ -317,27 +338,6 @@
       switchTab(selection, newBreadcrumbPath);
       updateCurriculumDropdown();
       updatePedagogyDropdown(); // Add this line
-    }
-
-    function updateCurriculumDropdown() {
-      const dropdown = document.getElementById("curriculumDropdown");
-      dropdown.innerHTML = ""; // Clear existing items
-      
-      curriculumOptions[topLevelSelection].forEach(option => {
-        const item = document.createElement("div");
-        item.className = "dropdown-item";
-
-        // Assign indentation classes
-        if (option.label === "Policy" || option.label === "Practice") {
-          item.classList.add("indent-1");
-        } else if (!["Area", "Policy", "Practice"].includes(option.label)) {
-          item.classList.add("indent-2");
-        }
-
-        item.textContent = option.label;
-        item.onclick = () => switchTab(option.id, option.breadcrumb);
-        dropdown.appendChild(item);
-      });
     }
 
     function switchTab(mapID, newBreadcrumbPath = '') {
