@@ -564,6 +564,43 @@
         dropdown.appendChild(item);
       });
     }
+
+
+    const trackingOptions = {
+      efdi_all: [
+      ],
+      efdi_non_system: [
+      ],
+      efdi_policy: [
+      ],
+      efdi_practice: [
+      ],
+      efdi_levels: [
+      ],
+      efdi_equality: [
+      ]
+    };
+
+    function updateTrackingDropdown() {
+      const dropdown = document.getElementById("trackingDropdown");
+      dropdown.innerHTML = ""; // Clear existing items
+
+      trackingOptions[topLevelSelection].forEach(option => {
+        const item = document.createElement("div");
+        item.className = "dropdown-item";
+
+        // Assign indentation classes
+        if (option.label === "Policy" || option.label === "Practice") {
+          item.classList.add("indent-1");
+        } else if (!["Area", "Policy", "Practice"].includes(option.label)) {
+          item.classList.add("indent-2");
+        }
+
+        item.textContent = option.label;
+        item.onclick = () => switchTab(option.id, option.breadcrumb);
+        dropdown.appendChild(item);
+      });
+    }
     
     
     function updateYear(index) {
@@ -581,6 +618,7 @@
       updateTrainingDropdown();
       updateAutonomyDropdown();
       updateCeDropdown();
+      updateTrackingDropdown();
     }
 
     function switchTab(mapID, newBreadcrumbPath = '') {
@@ -774,6 +812,7 @@
     updateTrainingDropdown();
     updateAutonomyDropdown();
     updateCeDropdown();
+    updateTrackingDropdown();
   </script>
 </body>
 </html>
