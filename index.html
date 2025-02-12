@@ -153,6 +153,11 @@
     Pedagogy
     <div class="dropdown-menu" id="pedagogyDropdown"></div>
   </div>
+
+    <div class="tab">
+    Training
+    <div class="dropdown-menu" id="trainingDropdown"></div>
+  </div>
 </div>
 
   <div class="year-slider">
@@ -327,6 +332,53 @@
       });
     }
 
+    const trainingOptions = {
+      efdi_all: [
+        { id: "train_all", label: "Area", breadcrumb: "Overall > Training" },
+        { id: "train_policy_all", label: "Policy", breadcrumb: "Overall > Training > Policy" },
+        { id: "train_policy_all_in_service", label: "In-service", breadcrumb: "Overall > Training > Policy > In-service" },
+        { id: "train_policy_all_mandatory", label: "Mandatory", breadcrumb: "Overall > Training > Policy > Mandatory" }
+      ],
+      efdi_non_system: [
+        { id: "train_non", label: "Area", breadcrumb: "Non-system > Training" },
+        { id: "train_policy_non", label: "Policy", breadcrumb: "Non-system > Training > Policy" },
+        { id: "train_policy_non_in_service", label: "In-service", breadcrumb: "Non-system > Training > Policy > In-service" },
+        { id: "train_policy_non_mandatory", label: "Mandatory", breadcrumb: "Non-system > Training > Policy > Mandatory" }
+      ],
+      efdi_policy: [
+        { id: "train_policy_policy", label: "Area", breadcrumb: "Policy > Training" },
+        { id: "train_policy_in_service", label: "In-service", breadcrumb: "Policy > Training > In-service" },
+        { id: "train_policy_mandatory", label: "Mandatory", breadcrumb: "Policy > Training > Mandatory" }
+      ],
+      efdi_levels: [
+        { id: "train_levels", label: "Area", breadcrumb: "Levels > Training" },
+        { id: "train_policy_levels", label: "Policy", breadcrumb: "Levels > Training > Policy" },
+        { id: "train_policy_levels_in_service", label: "In-service", breadcrumb: "Levels > Training > Policy > In-service" },
+        { id: "train_policy_levels_mandatory", label: "Mandatory", breadcrumb: "Levels > Training > Policy > Mandatory" }
+      ]
+    };
+
+    function updateTrainingDropdown() {
+      const dropdown = document.getElementById("trainingDropdown");
+      dropdown.innerHTML = ""; // Clear existing items
+
+      trainingOptions[topLevelSelection].forEach(option => {
+        const item = document.createElement("div");
+        item.className = "dropdown-item";
+
+        // Assign indentation classes
+        if (option.label === "Policy" || option.label === "Practice") {
+          item.classList.add("indent-1");
+        } else if (!["Area", "Policy", "Practice"].includes(option.label)) {
+          item.classList.add("indent-2");
+        }
+
+        item.textContent = option.label;
+        item.onclick = () => switchTab(option.id, option.breadcrumb);
+        dropdown.appendChild(item);
+      });
+    }
+
     function updateYear(index) {
       currentYear = years[index];
       document.getElementById("selectedYear").textContent = currentYear;
@@ -338,6 +390,7 @@
       switchTab(selection, newBreadcrumbPath);
       updateCurriculumDropdown();
       updatePedagogyDropdown(); // Add this line
+      updateTrainingDropdown();
     }
 
     function switchTab(mapID, newBreadcrumbPath = '') {
@@ -398,6 +451,21 @@
           pedagogy_equality: `${baseURL}comp_subin_eq_ped_${currentYear}/`,
           pedagogy_policy_policy: `${baseURL}comp_ped_pol_${currentYear}/`,
           pedagogy_practice_practice: `${baseURL}comp_ped_prac_${currentYear}/`,
+          train_all: `${baseURL}comp_subin_train_${currentYear}/`,
+          train_non: `${baseURL}comp_subin_train_${currentYear}/`,
+          train_levels: `${baseURL}comp_subin_train_${currentYear}/`,
+          train_policy_all: `${baseURL}comp_train_pol_${currentYear}/`,
+          train_policy_non: `${baseURL}comp_train_pol_${currentYear}/`,
+          train_policy_policy: `${baseURL}comp_train_pol_${currentYear}/`,
+          train_policy_levels: `${baseURL}comp_train_pol_${currentYear}/`,
+          train_policy_all_in_service: `${baseURL}comp_train_pol_service_${currentYear}/`,
+          train_policy_non_in_service: `${baseURL}comp_train_pol_service_${currentYear}/`,
+          train_policy_in_service: `${baseURL}comp_train_pol_service_${currentYear}/`,
+          train_policy_levels_in_service: `${baseURL}comp_train_pol_service_${currentYear}/`,
+          train_policy_all_mandatory: `${baseURL}comp_train_pol_man_${currentYear}/`,
+          train_policy_non_mandatory: `${baseURL}comp_train_pol_man_${currentYear}/`,
+          train_policy_mandatory: `${baseURL}comp_train_pol_man_${currentYear}/`,
+          train_policy_levels_mandatory: `${baseURL}comp_train_pol_man_${currentYear}/`
         };
 
         mapFrame.src = mapURLs[mapID] || mapURLs['efdi_all'];
@@ -417,6 +485,7 @@
     // Initialize the dropdowns with the default selection
     updateCurriculumDropdown();
     updatePedagogyDropdown();
+    updateTrainingDropdown();
   </script>
 </body>
 </html>
