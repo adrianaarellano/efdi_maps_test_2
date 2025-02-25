@@ -467,7 +467,9 @@
         { id: "autonomy_all", label: "Area", breadcrumb: "Overall > Unitary system" },
         { id: "autonomy_policy_all", label: "Policy", breadcrumb: "Overall > Unitary system > Policy" },
         { id: "autonomy_policy_all_assess", label: "Guidelines", breadcrumb: "Overall > Unitary system > Policy > Assessment" },
-        { id: "autonomy_policy_all_cur", label: "Centralized Curriculum", breadcrumb: "Overall > Unitary system > Policy > Curriculum Implementation" },
+        { id: "autonomy_policy_all_cur", label: "Curriculum Implementation", breadcrumb: "Overall > Unitary system > Policy > Curriculum Implementation" },
+        { id: "autonomy_policy_all_gov", label: "School Governance", breadcrumb: "Overall > Unitary system > Policy > School Governance" },
+        { id: "autonomy_policy_all_recruit", label: "Teacher Recruitment", breadcrumb: "Overall > Unitary system > Policy > Teacher Recruitment" },
         { id: "autonomy_practice_all", label: "Practice", breadcrumb: "Overall > Unitary system > Practice" },
         { id: "autonomy_practice_all_ce_act", label: "Centralized CE Activities", breadcrumb: "Overall > Unitary system > Practice > Centralization of Activities" },
         { id: "autonomy_practice_all_teach_cur", label: "Teacher Use of Official Curricula", breadcrumb: "Overall > Unitary system > Practice > Use of Official Curricula" }
@@ -477,7 +479,9 @@
       efdi_policy: [
         { id: "autonomy_policy_policy", label: "Area", breadcrumb: "Policy > Unitary system" },
         { id: "autonomy_policy_assess", label: "Guidelines", breadcrumb: "Policy > Unitary system > Assessment" },
-        { id: "autonomy_policy_cur", label: "Centralized Curriculum", breadcrumb: "Policy > Unitary system > Curriculum Implementation" }
+        { id: "autonomy_policy_cur", label: "Curriculum Implementation", breadcrumb: "Policy > Unitary system > Curriculum Implementation" },
+        { id: "autonomy_policy_gov", label: "School Governance", breadcrumb: "Policy > Unitary system > School Governance" },
+        { id: "autonomy_policy_recruit", label: "Teacher Recruitment", breadcrumb: "Policy > Unitary system > Teacher Recruitment" }
       ],
       efdi_practice: [
         { id: "autonomy_practice_practice", label: "Area", breadcrumb: "Practice > Unitary system" },
@@ -490,7 +494,9 @@
         { id: "autonomy_equality", label: "Area", breadcrumb: "Equality > Unitary system" },
         { id: "autonomy_policy_equality", label: "Policy", breadcrumb: "Equality > Unitary system > Policy" },
         { id: "autonomy_policy_equality_assess", label: "Guidelines", breadcrumb: "Equality > Unitary system > Policy > Assessment" },
-        { id: "autonomy_policy_equality_cur", label: "Centralized Curriculum", breadcrumb: "Overall > Unitary system > Policy > Curriculum Implementation" },
+        { id: "autonomy_policy_equality_cur", label: "Curriculum Implementation", breadcrumb: "Equality > Unitary system > Policy > Curriculum Implementation" },
+        { id: "autonomy_policy_equality_gov", label: "School Governance", breadcrumb: "Equality > Unitary system > Policy > School Governance" },
+        { id: "autonomy_policy_equality_recruit", label: "Teacher Recruitment", breadcrumb: "Equality > Unitary system > Policy > Teacher Recruitment" },
         { id: "autonomy_practice_equality", label: "Practice", breadcrumb: "Equality > Unitary system > Practice" },
         { id: "autonomy_practice_equality_ce_act", label: "Student Involvement", breadcrumb: "Equality > Unitary system > Practice > Centralized CE Activities" },
         { id: "autonomy_practice_equality_teach_cur", label: "Teacher Use of Official Curricula", breadcrumb: "Equality > Unitary system > Practice > Use of Official Curricula" }
@@ -783,6 +789,12 @@
           autonomy_policy_all_cur: `${baseURL}comp_auto_pol_cur_del_${currentYear}/`,
           autonomy_policy_cur: `${baseURL}comp_auto_pol_cur_del_${currentYear}/`,
           autonomy_policy_equality_cur: `${baseURL}comp_auto_pol_cur_del_${currentYear}/`,
+          autonomy_policy_all_gov: `${baseURL}comp_auto_pol_gov_${currentYear}/`,
+          autonomy_policy_gov: `${baseURL}comp_auto_pol_cur_del_${currentYear}/`,
+          autonomy_policy_equality_gov: `${baseURL}comp_auto_pol_gov_${currentYear}/`,
+          autonomy_policy_all_recruit: `${baseURL}comp_auto_pol_recruit_${currentYear}/`,
+          autonomy_policy_recruit: `${baseURL}comp_auto_pol_recruit_${currentYear}/`,
+          autonomy_policy_equality_recruit: `${baseURL}comp_auto_pol_recruit_${currentYear}/`,
           autonomy_practice_all: `${baseURL}comp_auto_prac_${currentYear}/`,
           autonomy_practice_practice: `${baseURL}comp_auto_prac_${currentYear}/`,
           autonomy_practice_equality: `${baseURL}comp_auto_prac_${currentYear}/`,
